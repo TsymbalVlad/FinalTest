@@ -41,8 +41,11 @@ namespace Final.Endpoints.ProductEndpoints.Commands
             var relatedWishList = _context.WishLists.Where(wl => wl.ProductId == id);
             _context.WishLists.RemoveRange(relatedWishList);
             await _context.SaveChangesAsync();
+
             _cache.Remove("product_data");
-            return Ok();
+			_cache.Remove("producttype_data");
+
+			return Ok();
         }
     }
 }
